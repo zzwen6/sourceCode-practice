@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import top.hting.bean.User;
+import top.hting.mapper.UserMapper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +18,7 @@ public class App
 {
     public static void main( String[] args ) throws IOException {
 
-        User user = new User(2,"Hello2");
+        User user = new User(5,"Hello5");
 
         String xml = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(xml);
@@ -26,13 +27,18 @@ public class App
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
         // 获取会话
-        SqlSession sqlSession = sqlSessionFactory.openSession();
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
         // 从会话中取出ID 为save的语句进行执行
-        sqlSession.insert("save", user);
+//        sqlSession.insert("save", user);
+
+        userMapper.save(user);
 
         // 需要手动提交 默认为false的
-        sqlSession.commit();
+//        sqlSession.commit();
 
         sqlSession.close();
 
