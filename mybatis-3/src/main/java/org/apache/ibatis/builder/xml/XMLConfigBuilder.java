@@ -78,11 +78,16 @@ public class XMLConfigBuilder extends BaseBuilder {
   }
 
   public XMLConfigBuilder(InputStream inputStream, String environment, Properties props) {
+    // 继续调用内部重载方法 1
+    // 用文件流构建了一个 XPathParser 对象，传入一个默认的xml解析器，实际上是初始化一些对象，并用jdk的xml方法读取，最终用后面的xpath来寻找节点
     this(new XPathParser(inputStream, true, props, new XMLMapperEntityResolver()), environment, props);
   }
 
+  // 重载方法 1 ,私有的哦，初始化一些变量
   private XMLConfigBuilder(XPathParser parser, String environment, Properties props) {
+    // 调用父类的构造，注册默认的别名
     super(new Configuration());
+
     ErrorContext.instance().resource("SQL Mapper Configuration");
     this.configuration.setVariables(props);
     this.parsed = false;
@@ -91,10 +96,13 @@ public class XMLConfigBuilder extends BaseBuilder {
   }
 
   public Configuration parse() {
+    // 文件只能加载一次
     if (parsed) {
       throw new BuilderException("Each XMLConfigBuilder can only be used once.");
     }
     parsed = true;
+    // 用xpath解析xml，从根节点  configuration 开始
+    // 然后再解析其他的属性节点
     parseConfiguration(parser.evalNode("/configuration"));
     return configuration;
   }

@@ -73,9 +73,10 @@ public class SqlSessionFactoryBuilder {
     return build(inputStream, null, properties);
   }
 
-  // 2 文件流的形式构建工厂最终还是调用 3
+  // 2 文件流的形式构建工厂-最终还是调用 3
   public SqlSessionFactory build(InputStream inputStream, String environment, Properties properties) {
     try {
+      // 分析 XMLConfigBuilder 是如何解析xml文件的
       XMLConfigBuilder parser = new XMLConfigBuilder(inputStream, environment, properties);
       return build(parser.parse());
     } catch (Exception e) {
