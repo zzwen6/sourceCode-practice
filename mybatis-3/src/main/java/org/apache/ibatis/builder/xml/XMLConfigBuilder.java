@@ -85,7 +85,7 @@ public class XMLConfigBuilder extends BaseBuilder {
 
   // 重载方法 1 ,私有的哦，初始化一些变量
   private XMLConfigBuilder(XPathParser parser, String environment, Properties props) {
-    // 调用父类的构造，注册默认的别名
+    // 调用父类的构造，注册默认的别名，类型处理器
     super(new Configuration());
 
     ErrorContext.instance().resource("SQL Mapper Configuration");
@@ -231,14 +231,17 @@ public class XMLConfigBuilder extends BaseBuilder {
       Properties defaults = context.getChildrenAsProperties();
       String resource = context.getStringAttribute("resource");
       String url = context.getStringAttribute("url");
+      // url 和 resource 仅能指定一个
       if (resource != null && url != null) {
         throw new BuilderException("The properties element cannot specify both a URL and a resource based property file reference.  Please specify one or the other.");
       }
+
       if (resource != null) {
         defaults.putAll(Resources.getResourceAsProperties(resource));
       } else if (url != null) {
         defaults.putAll(Resources.getUrlAsProperties(url));
       }
+
       Properties vars = configuration.getVariables();
       if (vars != null) {
         defaults.putAll(vars);
