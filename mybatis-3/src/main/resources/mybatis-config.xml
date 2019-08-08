@@ -12,7 +12,8 @@
   </settings>
 
   <typeHandlers>
-    <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="org.apache.ibatis.zzwen6.entity.EnumSex"/>
+    <typeHandler handler="org.apache.ibatis.zzwen6.handler.SexTypeHandler"
+                 javaType="org.apache.ibatis.zzwen6.entity.EnumSex"/>
 
   </typeHandlers>
   <environments default="default">
@@ -27,6 +28,8 @@
     </environment>
   </environments>
   <mappers>
-      <mapper resource="mapper/UserMapper.xml"/>
+    <mapper resource="mapper/UserMapper.xml"/>
+    <package name="org.apache.ibatis.zzwen6.mapper.oracle" />
+
   </mappers>
 </configuration>

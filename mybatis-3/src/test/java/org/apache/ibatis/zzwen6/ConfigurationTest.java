@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class ConfigurationTest {
 
@@ -33,11 +34,14 @@ public class ConfigurationTest {
 
     SqlSession sqlSession = sqlSessionFactory.openSession();
 
+
+    List<Object> objects = sqlSession.selectList("selectById");
+
     UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 
-    User user = mapper.selectById(2);
+    User user = mapper.selectById(1);
 
-    assertEquals(2, user.getId());
+    assertEquals(1, user.getId());
 
     System.out.println(user.toString());
   }

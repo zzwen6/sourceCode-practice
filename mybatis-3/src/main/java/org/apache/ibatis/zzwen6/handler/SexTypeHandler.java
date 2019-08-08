@@ -1,4 +1,4 @@
-package org.apache.ibatis.zzwen6;
+package org.apache.ibatis.zzwen6.handler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+/**
+ * 自定义的枚举类型解析器
+ */
 public class SexTypeHandler extends BaseTypeHandler<EnumSex>{
 
 
