@@ -232,10 +232,15 @@ public class XPathParser {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       factory.setValidating(validation);
 
+      // 解析器是否支持命名空间
       factory.setNamespaceAware(false);
+      // 忽视注释
       factory.setIgnoringComments(true);
+      // 忽视元素内容空白符
       factory.setIgnoringElementContentWhitespace(false);
+      // CDATA 转为 text
       factory.setCoalescing(false);
+      // 扩展实体引用
       factory.setExpandEntityReferences(true);
 
       DocumentBuilder builder = factory.newDocumentBuilder();
@@ -255,12 +260,14 @@ public class XPathParser {
         public void warning(SAXParseException exception) throws SAXException {
         }
       });
+      // SAX 解析xml，返回一个DOM
       return builder.parse(inputSource);
     } catch (Exception e) {
       throw new BuilderException("Error creating document instance.  Cause: " + e, e);
     }
   }
 
+  //只是初始化一些变量
   private void commonConstructor(boolean validation, Properties variables, EntityResolver entityResolver) {
     this.validation = validation;
     this.entityResolver = entityResolver;
