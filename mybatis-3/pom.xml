@@ -195,11 +195,19 @@
       <version>3.2.10</version>
       <optional>true</optional>
     </dependency>
+
+    <!--mybatis 之外的依赖-->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.46</version>
     </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.8</version>
+    </dependency>
+
 
     <!-- Test dependencies -->
     <dependency>

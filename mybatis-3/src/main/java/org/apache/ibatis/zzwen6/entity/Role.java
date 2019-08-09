@@ -4,17 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+public class Role {
 
-  private Integer id;
+  private Integer roleId;
 
-  private String name;
+  private String roleName;
 
-  private EnumSex sex;
 
 }
