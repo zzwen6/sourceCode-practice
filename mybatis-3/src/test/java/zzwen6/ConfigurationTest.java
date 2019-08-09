@@ -1,20 +1,19 @@
-package org.apache.ibatis.zzwen6;
-
+package zzwen6;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.zzwen6.dto.UserRoleDto;
-import org.apache.ibatis.zzwen6.mapper.UserMapper;
+import zzwen6.entity.User;
+import zzwen6.mapper.UserMapper;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public class CollectionsTest {
-
+public class ConfigurationTest {
 
   private static SqlSessionFactory sqlSessionFactory;
 
@@ -30,16 +29,20 @@ public class CollectionsTest {
   }
 
   @Test
-  public void collectionTest() {
+  public void testSelectById() {
+
     SqlSession sqlSession = sqlSessionFactory.openSession();
+
+
+    User objects = sqlSession.selectOne("zzwen6.mapper.UserMapper.selectById", 1);
 
     UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 
-    UserRoleDto userRoleDto = mapper.selectUserById(1);
+    User user = mapper.selectById(1);
 
-    System.out.println(userRoleDto.toString());
+    assertEquals(1, user.getId());
 
-
+    System.out.println(user.toString());
   }
 
 
