@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.apache.ibatis.zzwen6.mapper.UserMapper">
-  <resultMap id="UserRoleDto" type="org.apache.ibatis.zzwen6.dto.UserRoleDto">
+<mapper namespace="zzwen6.mapper.UserMapper">
+  <resultMap id="UserRoleDto" type="zzwen6.dto.UserRoleDto">
     <id column="id" property="user.id"></id>
     <result column="name" property="user.name"></result>
     <result column="sex" property="user.sex"></result>
-    <collection property="roles" ofType="org.apache.ibatis.zzwen6.entity.Role">
+    <collection property="roles" ofType="zzwen6.entity.Role">
       <id column="roleId" property="roleId"></id>
       <result column="roleName" property="roleName"></result>
 
@@ -14,7 +14,7 @@
 
   </resultMap>
 
-  <select id="selectById" resultType="org.apache.ibatis.zzwen6.entity.User">
+  <select id="selectById" resultType="zzwen6.entity.User">
     select * from user where id = #{id}
 
   </select>

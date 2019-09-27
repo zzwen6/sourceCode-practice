@@ -1,4 +1,4 @@
-package org.apache.ibatis.zzwen6.entity;
+package zzwen6.entity;
 
 public enum EnumSex {
   man(1),

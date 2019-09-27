@@ -1,8 +1,8 @@
-package org.apache.ibatis.zzwen6.handler;
+package zzwen6.handler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.zzwen6.entity.EnumSex;
+import zzwen6.entity.EnumSex;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
