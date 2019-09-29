@@ -13,4 +13,7 @@ public class UrlPath implements Serializable {
 
     private String publishDate;
 
+
+
+
 }

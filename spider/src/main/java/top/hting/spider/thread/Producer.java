@@ -2,41 +2,58 @@ package top.hting.spider.thread;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import top.hting.spider.model.UrlPath;
 
 import java.io.IOException;
-import java.util.concurrent.BlockingDeque;
 
 /**
- *  生产者
+ * 生产者
  */
-public class Producer implements Runnable {
+public class Producer extends AbstractProducer<UrlPath> {
 
-    private BlockingDeque<UrlPath> queue;
-    // 初始URL
-    private String initUrl;
 
-    public Producer(BlockingDeque<UrlPath> queue, String initUrl) {
-        this.queue = queue;
-        this.initUrl = initUrl;
+    public Producer(int capacity, int consumers) {
+        super(capacity);
+        // 初始化线程，然后再执行生产
+        AbstractConsumer consumer = new Consumer(queue);
+        consumerThread(consumers, consumer);
+
+        // produceProduct(url);
     }
 
-    @Override
-    public void run() {
+    public void produceProduct(String url) {
+        // 解析url，然后将解析后要处理的url 添加到队列
 
-        // 1. 解析初始url获取真实需要的url信息
+        // 1. 解析每页的url获取到列表url
         try {
-            Document document = Jsoup.connect(initUrl).get();
+            Document document = Jsoup.connect(url).get();
+            Element resultListEle = document.getElementById("resultList");
+
+            Elements elements = resultListEle.select("div[class=el]").select("p[class=t1]").select("span").select("a");
+
+            for (Element element : elements) {
+
+                String href = element.attr("href");
+
+                UrlPath urlPath = new UrlPath();
+                urlPath.setUrl(href);
+                urlPath.setPublishDate("");
+                urlPath.setCompany("");
+                while (!put(urlPath)){}
+            }
+
+
+
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // 获取本页的列表url，可填到队列中
-
-        // 获取分页，然后再
-
-
-        // 2. 将真实url放入到队列中
-
     }
+
+
 }

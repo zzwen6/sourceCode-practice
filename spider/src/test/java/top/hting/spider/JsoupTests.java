@@ -5,6 +5,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
+import top.hting.spider.model.Query;
+import top.hting.spider.thread.Producer;
 
 import java.io.IOException;
 
@@ -41,6 +43,18 @@ public class JsoupTests {
 
     }
 
+    @Test
+    public void produce() {
 
+        Query query = Query.builder().keyword("java").cityCode("030200").page(1).build();
+
+
+        Producer producer = new Producer(16, 8);
+        producer.produceProduct(query.url());
+
+        // while (true){
+        //
+        // }
+    }
 
 }
