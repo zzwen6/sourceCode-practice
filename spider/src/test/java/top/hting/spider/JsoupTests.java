@@ -46,11 +46,16 @@ public class JsoupTests {
     @Test
     public void produce() {
 
-        Query query = Query.builder().keyword("java").cityCode("030200").page(1).build();
+        for (int i = 1; i < 100; i++) {
+            Query query = Query.builder().keyword("java").cityCode("030200").page(i).build();
 
 
-        Producer producer = new Producer(16, 8);
-        producer.produceProduct(query.url());
+
+            Producer producer = new Producer(16, 8);
+            producer.produceProduct(query.url());
+
+        }
+
 
         // while (true){
         //
